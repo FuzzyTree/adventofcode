@@ -8,18 +8,24 @@ const tall = 6;
 const layerSize = wide * tall;;
 const countDigits = (layer,digit) => layer.split('').reduce((s,e) => e === digit ? s+1 : s, 0)
 
+let layers = [];
 for (i=0; i<input.length; i+=layerSize) {
   let layer = input.substr(i,layerSize);
-  let zeros = countDigits(layer,'0'); 
+  layers.push(layer);
+}
 
-  if (min === false || min > zeros) {
-    min = zeros;
-    minLayer = layer;
+let visible = layers[0].split('')
+
+for (let layer of layers) {
+  for (i=0; i<layer.length; i++) {
+    if (visible[i] === '2') {
+      visible[i] = layer[i];
+    }
   }
 }
 
-let ones = countDigits(minLayer,'1'); 
-let twos = countDigits(minLayer,'2'); 
-let result = ones * twos;
+visible = visible.join('').replace(/0/g,' ');
 
-console.log({ ones, twos, result, min, minLayer });
+for (i=0; i<visible.length; i+=wide) {
+  console.log(visible.substr(i,wide))
+}
