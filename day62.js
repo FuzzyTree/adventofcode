@@ -41,10 +41,8 @@ while (planet && planet.planet && planet.planet !== destination.planet) {
 planet = destination
 let lowest = false;
 
-distance = (a,b) => a-b
-
 while (planet && planet.planet) {
-  if (planet.planet in startPath && (planet.steps < lowest || !lowest)) {
+  if (planet.planet in startPath) {
       console.log({ startPath, planet })
       lowest = planet.steps;
       break;
